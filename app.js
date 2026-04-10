@@ -1,4 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
 import {
   getFirestore,
   collection,
@@ -13,13 +14,18 @@ import {
   getDownloadURL
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-// ⚠️ ВСТАВЬ СВОИ ДАННЫЕ
+
+// 🔥 ТВОЙ CONFIG (я вставил)
 const firebaseConfig = {
-  apiKey: "ТВОЙ_API_KEY",
-  authDomain: "ТВОЙ_PROJECT.firebaseapp.com",
-  projectId: "ТВОЙ_PROJECT_ID",
-  storageBucket: "ТВОЙ_PROJECT.appspot.com",
+  apiKey: "AIzaSyDVrBCFo9Y_Y0jE4q57Qk-76zGQmgCu6fw",
+  authDomain: "me-c2e04.firebaseapp.com",
+  projectId: "me-c2e04",
+  storageBucket: "me-c2e04.firebasestorage.app",
+  messagingSenderId: "653957170045",
+  appId: "1:653957170045:web:639e966a9d35c36eb9c214",
+  measurementId: "G-EJ3HNVZTSG"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -30,7 +36,7 @@ const urlInput = document.getElementById("photoUrl");
 const fileInput = document.getElementById("fileInput");
 
 
-// 🔥 1. ДОБАВЛЕНИЕ ПО ССЫЛКЕ (Enter)
+// 🔗 ДОБАВЛЕНИЕ ПО ССЫЛКЕ (ENTER)
 urlInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     const url = urlInput.value.trim();
@@ -44,7 +50,7 @@ urlInput.addEventListener("keypress", async (e) => {
 });
 
 
-// 🔥 2. ЗАГРУЗКА С ПК (авто)
+// 📁 ЗАГРУЗКА С ПК
 fileInput.addEventListener("change", async () => {
   const file = fileInput.files[0];
   if (!file) return;
