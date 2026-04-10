@@ -12,8 +12,7 @@ const firebaseConfig = {
   projectId: "me-c2e04",
   storageBucket: "me-c2e04.firebasestorage.app",
   messagingSenderId: "653957170045",
-  appId: "1:653957170045:web:639e966a9d35c36eb9c214",
-  measurementId: "G-EJ3HNVZTSG"
+  appId: "1:653957170045:web:639e966a9d35c36eb9c214"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -21,16 +20,24 @@ const db = getFirestore(app);
 
 const usersRef = collection(db, "users");
 
-async function addUser() {
+window.addUser = async function () {
+  const name = document.getElementById("name").value;
+  const photo = document.getElementById("photo").value;
+
+  if (!name || !photo) {
+    alert("Заполни имя и фото 💖");
+    return;
+  }
+
   await addDoc(usersRef, {
-    name: "Alex",
-    age: 20
+    name,
+    photo
   });
 
   alert("Добавлено 💖");
-}
+};
 
-async function loadUsers() {
+window.loadUsers = async function () {
   const snap = await getDocs(usersRef);
 
   const list = document.getElementById("list");
@@ -40,11 +47,26 @@ async function loadUsers() {
     const data = doc.data();
 
     const li = document.createElement("li");
-    li.textContent = `${data.name} (${data.age})`;
+
+    li.innerHTML = `
+      <div style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:#ffe4ec;
+        padding:10px;
+        border-radius:12px;
+      ">
+        <img src="${data.photo}" style="
+          width:50px;
+          height:50px;
+          border-radius:50%;
+          object-fit:cover;
+        ">
+        <span>${data.name}</span>
+      </div>
+    `;
+
     list.appendChild(li);
   });
-}
-
-// 💥 ВАЖНО — делаем кнопки видимыми для HTML
-window.addUser = addUser;
-window.loadUsers = loadUsers;
+};
