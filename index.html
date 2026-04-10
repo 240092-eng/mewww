@@ -24,25 +24,12 @@ body {
   text-align: center;
 }
 
-h1 {
-  color: #ff2e63;
-}
-
 input {
   width: 90%;
   padding: 10px;
   margin: 10px 0;
   border-radius: 12px;
   border: 1px solid #ffb6c1;
-}
-
-button {
-  background: linear-gradient(135deg, #ff2e63, #ff6b9a);
-  border: none;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 12px;
-  cursor: pointer;
 }
 
 ul {
@@ -66,8 +53,11 @@ img {
 <div class="card">
   <h1>💖 Pink Gallery</h1>
 
-  <input id="photo" placeholder="Вставь ссылку на фото">
-  <button onclick="addPhoto()">Загрузить</button>
+  <!-- ссылка -->
+  <input id="photoUrl" placeholder="Вставь ссылку и нажми Enter">
+
+  <!-- файл с ПК -->
+  <input type="file" id="fileInput" accept="image/*">
 
   <ul id="list"></ul>
 </div>
