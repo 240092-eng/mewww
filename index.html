@@ -1,17 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <title>Firestore Test</title>
+  <meta charset="UTF-8">
+  <title>Firestore Pink App</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      width: 350px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #e63e5c;
+      transform: scale(1.05);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    li {
+      background: #ffe3e8;
+      margin: 5px 0;
+      padding: 8px;
+      border-radius: 10px;
+      color: #333;
+    }
+  </style>
 </head>
+
 <body>
 
-  <h1>Firebase Firestore</h1>
+  <div class="card">
+    <h1>💖 Firestore App</h1>
 
-  <button onclick="addUser()">Добавить</button>
-  <button onclick="loadUsers()">Загрузить</button>
+    <button onclick="addUser()">Добавить</button>
+    <button onclick="loadUsers()">Загрузить</button>
 
-  <ul id="list"></ul>
+    <ul id="list"></ul>
+  </div>
 
   <script type="module" src="app.js"></script>
+
 </body>
 </html>
