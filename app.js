@@ -4,86 +4,77 @@ import {
   getFirestore,
   collection,
   addDoc,
-  getDocs
+  getDocs,
+  updateDoc,
+  doc
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
-
-
-// 🔥 ТВОЙ CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyDVrBCFo9Y_Y0jE4q57Qk-76zGQmgCu6fw",
   authDomain: "me-c2e04.firebaseapp.com",
   projectId: "me-c2e04",
-  storageBucket: "me-c2e04.appspot.com",
-  messagingSenderId: "653957170045",
-  appId: "1:653957170045:web:639e966a9d35c36eb9c214",
-  measurementId: "G-EJ3HNVZTSG"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
+const input = document.getElementById("photoUrl");
 const list = document.getElementById("list");
-const urlInput = document.getElementById("photoUrl");
-const fileInput = document.getElementById("fileInput");
 
 
-// 🔗 ДОБАВЛЕНИЕ ПО ССЫЛКЕ
-urlInput.addEventListener("keypress", async (e) => {
+// ➕ добавить фото по Enter
+input.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
-    const url = urlInput.value.trim();
+    const url = input.value.trim();
     if (!url) return;
 
-    await addDoc(collection(db, "photos"), { url });
+    await addDoc(collection(db, "photos"), {
+      url,
+      likes: 0
+    });
 
-    urlInput.value = "";
+    input.value = "";
     loadPhotos();
   }
 });
 
 
-// 📁 ЗАГРУЗКА С ПК
-fileInput.addEventListener("change", async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
+// ❤️ лайк
+window.likePhoto = async function (id, currentLikes) {
+  const ref = doc(db, "photos", id);
 
-  const storageRef = ref(storage, "images/" + Date.now() + "_" + file.name);
-
-  await uploadBytes(storageRef, file);
-  const downloadURL = await getDownloadURL(storageRef);
-
-  await addDoc(collection(db, "photos"), {
-    url: downloadURL
+  await updateDoc(ref, {
+    likes: currentLikes + 1
   });
 
-  fileInput.value = "";
   loadPhotos();
-});
+};
 
 
-// 📥 ЗАГРУЗКА ФОТО
+// 📥 загрузка
 async function loadPhotos() {
   list.innerHTML = "";
 
   const snapshot = await getDocs(collection(db, "photos"));
 
-  snapshot.forEach((doc) => {
-    const data = doc.data();
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
 
-    const img = document.createElement("img");
-    img.src = data.url;
+    const div = document.createElement("div");
+    div.className = "post";
 
-    list.appendChild(img);
+    div.innerHTML = `
+      <img src="${data.url}">
+      <div>
+        <button class="like-btn" onclick="likePhoto('${docSnap.id}', ${data.likes || 0})">
+          ❤️
+        </button>
+        <span class="count">${data.likes || 0}</span>
+      </div>
+    `;
+
+    list.appendChild(div);
   });
 }
 
-
-// запуск
 loadPhotos();
