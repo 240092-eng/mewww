@@ -2,17 +2,17 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Pink Firebase Gallery</title>
+<title>Pink Gallery</title>
 
 <style>
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
   background: radial-gradient(circle at top, #ffd1dc, #ff80ab);
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .card {
@@ -20,43 +20,50 @@ body {
   padding: 30px;
   border-radius: 25px;
   width: 380px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   text-align: center;
 }
 
-h1 {
-  color: #ff2e63;
-}
+h1 { color: #ff2e63; }
 
 input {
   width: 90%;
   padding: 10px;
-  margin: 10px 0;
   border-radius: 12px;
   border: 1px solid #ffb6c1;
-}
-
-button {
-  background: linear-gradient(135deg, #ff2e63, #ff6b9a);
-  border: none;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 15px;
-  max-height: 300px;
-  overflow-y: auto;
+  margin: 10px 0;
 }
 
 img {
   width: 100%;
   border-radius: 12px;
-  margin: 6px 0;
+  margin-top: 8px;
+}
+
+.post {
+  margin-bottom: 20px;
+  background: #ffe6ee;
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.like-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.count {
+  margin-left: 8px;
+  color: #ff2e63;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
 }
 </style>
 </head>
@@ -66,16 +73,7 @@ img {
 <div class="card">
   <h1>💖 Pink Gallery</h1>
 
-  <!-- ссылка -->
   <input id="photoUrl" placeholder="Вставь ссылку и нажми Enter">
-
-  <!-- скрытый input -->
-  <input type="file" id="fileInput" accept="image/*" hidden>
-
-  <!-- красивая кнопка -->
-  <button onclick="document.getElementById('fileInput').click()">
-    📁 Выбрать фото
-  </button>
 
   <ul id="list"></ul>
 </div>
