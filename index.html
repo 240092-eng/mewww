@@ -1,81 +1,95 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Firestore Pink App</title>
+<meta charset="UTF-8">
+<title>Pink Firebase App</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #ffd1dc, #ff80ab);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .card {
-      background: purple;
-      padding: 30px;
-      border-radius: 20px;
-      width: 350px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      text-align: center;
-    }
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  width: 380px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  text-align: center;
+  animation: pop 0.4s ease;
+}
 
-    h1 {
-      color: #ff4d6d;
-      margin-bottom: 20px;
-    }
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
-    button {
-      background: #ff4d6d;
-      border: none;
-      color: pink;
-      padding: 10px 15px;
-      margin: 5px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: 0.3s;
-    }
+h1 {
+  color: #ff2e63;
+  margin-bottom: 15px;
+}
 
-    button:hover {
-      background: #e63e5c;
-      transform: scale(1.05);
-    }
+input {
+  width: 90%;
+  padding: 10px;
+  margin: 6px 0;
+  border-radius: 12px;
+  border: 1px solid #ffb6c1;
+  outline: none;
+}
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 15px;
-      max-height: 200px;
-      overflow-y: auto;
-    }
+button {
+  background: linear-gradient(135deg, #ff2e63, #ff6b9a);
+  border: none;
+  color: white;
+  padding: 12px 18px;
+  margin: 6px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    li {
-      background: #ffe3e8;
-      margin: 5px 0;
-      padding: 8px;
-      border-radius: 10px;
-      color: #333;
-    }
-  </style>
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(255, 46, 99, 0.4);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+li {
+  margin: 6px 0;
+}
+</style>
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>💖 Firestore App</h1>
+<div class="card">
+  <h1>💖 My Pink Firestore</h1>
 
-    <button onclick="addUser()">Добавить</button>
-    <button onclick="loadUsers()">Загрузить</button>
+  <input id="name" placeholder="Имя">
+  <input id="photo" placeholder="Ссылка на фото">
 
-    <ul id="list"></ul>
-  </div>
+  <button onclick="addUser()">Добавить</button>
+  <button onclick="loadUsers()">Загрузить</button>
 
-  <script type="module" src="app.js"></script>
+  <ul id="list"></ul>
+</div>
+
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
