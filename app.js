@@ -15,17 +15,16 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 
-// 🔥 ТВОЙ CONFIG (я вставил)
+// 🔥 ТВОЙ CONFIG
 const firebaseConfig = {
   apiKey: "AIzaSyDVrBCFo9Y_Y0jE4q57Qk-76zGQmgCu6fw",
   authDomain: "me-c2e04.firebaseapp.com",
   projectId: "me-c2e04",
-  storageBucket: "me-c2e04.firebasestorage.app",
+  storageBucket: "me-c2e04.appspot.com",
   messagingSenderId: "653957170045",
   appId: "1:653957170045:web:639e966a9d35c36eb9c214",
   measurementId: "G-EJ3HNVZTSG"
 };
-
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -36,7 +35,7 @@ const urlInput = document.getElementById("photoUrl");
 const fileInput = document.getElementById("fileInput");
 
 
-// 🔗 ДОБАВЛЕНИЕ ПО ССЫЛКЕ (ENTER)
+// 🔗 ДОБАВЛЕНИЕ ПО ССЫЛКЕ
 urlInput.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     const url = urlInput.value.trim();
@@ -69,7 +68,7 @@ fileInput.addEventListener("change", async () => {
 });
 
 
-// 📥 ЗАГРУЗКА ВСЕХ ФОТО
+// 📥 ЗАГРУЗКА ФОТО
 async function loadPhotos() {
   list.innerHTML = "";
 
