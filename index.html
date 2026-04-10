@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Pink Firebase App</title>
+<title>Pink Firebase Gallery</title>
 
 <style>
 body {
@@ -22,26 +22,18 @@ body {
   width: 380px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.25);
   text-align: center;
-  animation: pop 0.4s ease;
-}
-
-@keyframes pop {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 
 h1 {
   color: #ff2e63;
-  margin-bottom: 15px;
 }
 
 input {
   width: 90%;
   padding: 10px;
-  margin: 6px 0;
+  margin: 10px 0;
   border-radius: 12px;
   border: 1px solid #ffb6c1;
-  outline: none;
 }
 
 button {
@@ -49,27 +41,21 @@ button {
   border: none;
   color: white;
   padding: 12px 18px;
-  margin: 6px;
   border-radius: 12px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 15px rgba(255, 46, 99, 0.4);
 }
 
 ul {
   list-style: none;
   padding: 0;
   margin-top: 15px;
-  max-height: 220px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
-li {
+img {
+  width: 100%;
+  border-radius: 12px;
   margin: 6px 0;
 }
 </style>
@@ -78,13 +64,10 @@ li {
 <body>
 
 <div class="card">
-  <h1>💖 My Pink Firestore</h1>
+  <h1>💖 Pink Gallery</h1>
 
-  <input id="name" placeholder="Имя">
-  <input id="photo" placeholder="Ссылка на фото">
-
-  <button onclick="addUser()">Добавить</button>
-  <button onclick="loadUsers()">Загрузить</button>
+  <input id="photo" placeholder="Вставь ссылку на фото">
+  <button onclick="addPhoto()">Загрузить</button>
 
   <ul id="list"></ul>
 </div>
