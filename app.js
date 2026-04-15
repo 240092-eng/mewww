@@ -1,14 +1,4 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  doc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
 const firebaseConfig = {
   apiKey: "AIzaSyDVrBCFo9Y_Y0jE4q57Qk-76zGQmgCu6fw",
   authDomain: "me-c2e04.firebaseapp.com",
@@ -21,8 +11,6 @@ const db = getFirestore(app);
 const input = document.getElementById("photoUrl");
 const list = document.getElementById("list");
 
-
-// ➕ добавить фото по Enter
 input.addEventListener("keypress", async (e) => {
   if (e.key === "Enter") {
     const url = input.value.trim();
@@ -30,7 +18,8 @@ input.addEventListener("keypress", async (e) => {
 
     await addDoc(collection(db, "photos"), {
       url,
-      likes: 0
+      likes: 0,
+      dislikes: 0
     });
 
     input.value = "";
@@ -38,23 +27,27 @@ input.addEventListener("keypress", async (e) => {
   }
 });
 
-
-// ❤️ лайк
 window.likePhoto = async function (id, currentLikes) {
-  const ref = doc(db, "photos", id);
-
-  await updateDoc(ref, {
+  await updateDoc(doc(db, "photos", id), {
     likes: currentLikes + 1
   });
-
   loadPhotos();
 };
 
+window.dislikePhoto = async function (id, currentDislikes) {
+  await updateDoc(doc(db, "photos", id), {
+    dislikes: currentDislikes + 1
+  });
+  loadPhotos();
+};
 
-// 📥 загрузка
+window.deletePhoto = async function (id) {
+  await deleteDoc(doc(db, "photos", id));
+  loadPhotos();
+};
+
 async function loadPhotos() {
   list.innerHTML = "";
-
   const snapshot = await getDocs(collection(db, "photos"));
 
   snapshot.forEach((docSnap) => {
@@ -65,11 +58,14 @@ async function loadPhotos() {
 
     div.innerHTML = `
       <img src="${data.url}">
-      <div>
-        <button class="like-btn" onclick="likePhoto('${docSnap.id}', ${data.likes || 0})">
-          ❤️
-        </button>
+      <div style="margin-top:10px;">
+        <button class="like-btn" onclick="likePhoto('${docSnap.id}', ${data.likes || 0})">❤️</button>
         <span class="count">${data.likes || 0}</span>
+
+        <button class="like-btn" onclick="dislikePhoto('${docSnap.id}', ${data.dislikes || 0})">💔</button>
+        <span class="count">${data.dislikes || 0}</span>
+
+        <button class="like-btn" onclick="deletePhoto('${docSnap.id}')">🗑️</button>
       </div>
     `;
 
